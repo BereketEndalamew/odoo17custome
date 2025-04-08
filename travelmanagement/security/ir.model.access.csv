@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+travelmanagement.access_travel_cotraveller,access_travel_cotraveller,travelmanagement.model_travel_cotraveller,base.group_user,1,1,1,1
+travelmanagement.access_employe_wizard,access_employe_wizard,travelmanagement.model_employe_wizard,base.group_user,1,1,1,1
+
+

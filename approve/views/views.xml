@@ -1,0 +1,58 @@
+<odoo>
+        <record id="view_request_tree" model="ir.ui.view">
+        <field name="name">request.approval.tree</field>
+        <field name="model">request.approval</field>
+        <field name="arch" type="xml">
+            <tree>
+                      <field name="name"/>
+                        <field name="description"/>
+                        <field name="requester_id" readonly="1"/>
+                        <field name="approver_id"/>
+                        <field name="state1" readonly="1"/>
+            </tree>
+        </field>
+        </record>
+    <record id="view_request_form" model="ir.ui.view">
+        <field name="name">request.approval.form</field>
+        <field name="model">request.approval</field>
+        <field name="arch" type="xml">
+            <form string="Request Approval">
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="requester_id" readonly="1"/>
+                        <field name="approver_id"/>
+                        <field name="state1" readonly="1"/>
+                    </group>
+                    <group string="Approval History">
+                        <field name="approval_lines" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="approver_id"/>
+                                <field name="date_action"/>
+                                <field name="action"/>
+                                <field name="comments"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <header>
+                        <button name="action_submit" type="object" string="Submit" states1="draft" class="oe_highlight"/>
+<!--                        <button name="action_submit" type="object" string="Reset to Draft"-->
+<!--                                states1="submitted,approved,rejected" class="btn-secondary"/>-->
+                    </header>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_request_approval" model="ir.actions.act_window">
+        <field name="name">Requests</field>
+        <field name="res_model">request.approval</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_request_main" name="Requests" sequence="0"/>
+    <menuitem id="menu_request_approval1" name=" Request Approval"
+              parent="menu_request_main" sequence="10" action="action_request_approval"/>
+</odoo>

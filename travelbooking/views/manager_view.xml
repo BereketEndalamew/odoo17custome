@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_manager_approve_form" model="ir.ui.view">
+        <field name="name">manager.approve.form</field>
+        <field name="model">manager.approve</field>
+        <field name="arch" type="xml">
+            <form string="Manager Approval">
+                <header>
+                    <field name="request_status" widget="statusbar" statusbar_visible="approved,rejected,checked"/>
+                    <button name="action_approve"
+                            type="object"
+                            string="Approve"
+                            class="oe_highlight"
+                            modiffier="{'invisible': [('request_status', '=', 'approved')]}"/>
+
+                    <button name="action_reject"
+                            type="object"
+                            string="Reject"
+                            class="btn btn-danger"
+                            confirm="Are you sure you want to reject this request?"
+                            modiffier="{'invisible': [('request_status', '=', 'rejected')]}"/>
+<!--                    <button name="send_email_notification" type="object" string="Send Email Notification"-->
+<!--                            class="oe_highlight"/>-->
+
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employe_id"/>
+                            <field name="phone" readonly="1"/>
+                            <field name="email" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="request_date" readonly="1"/>
+                            <field name="duration_date" readonly="1"/>
+                            <field name="num_days" readonly="1"/>
+                            <field name="no_of_travellers" readonly="1"/>
+                            <field name="travel_type" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="no_of_travellers" readonly="1"/>
+                            <field name="travel_type" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Travelers Information">
+                        <field name="traveller_ids">
+                            <tree edditable="top" create="0" edit="0" delete="0">
+                                <field name="employe_id"/>
+                                <field name="phone" readonly="1"/>
+                                <field name="email" readonly="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_manager_approve_tree" model="ir.ui.view">
+        <field name="name">manager.approve.tree</field>
+        <field name="model">manager.approve</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employe_id"/>
+                <field name="phone" optional="show"/>
+                <field name="email" optional="show"/>
+
+                <field name="request_date" optional="show"/>
+                <field name="duration_date" optional="show"/>
+                <field name="travel_type" optional="show"/>
+                <field name="num_days" optional="show"/>
+                <field name="no_of_travellers" readonly="1" optional="show"/>
+                <!--                <field name="no_of_travel" optional="show"/>-->
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_request_info" model="ir.actions.act_window">
+        <field name="name">Travel Requests</field>
+        <field name="res_model">manager.approve</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_sm">Create a new travel request.</p>
+        </field>
+    </record>
+
+   <menuitem id="menu_travel_request" name="Employe" action="action_request_info"
+              sequence="15"/>
+    <menuitem id="menu_travel_request1" name="Manager" action="action_request_info"
+              parent="menu_travel_request" sequence="30"/>
+    <menuitem id="menu_travel_request2" name="Employe" action="action_request_info"
+              parent="menu_travel_request" sequence="40"/>
+</odoo>

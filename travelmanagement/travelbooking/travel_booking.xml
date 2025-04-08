@@ -1,0 +1,125 @@
+<odoo>
+    <!-- ✅ Tree View -->
+    <record id="view_travel_wizard_tree" model="ir.ui.view">
+        <field name="name">employe.wizard.tree</field>
+        <field name="model">employe.wizard</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employe_id" optional="show"/>
+                <field name="phone" optional="show"/>
+                <field name="email" optional="show"/>
+                <field name="request_date" optional="show"/>
+                <field name="end_date" optional="show"/>
+                <field name="num_days" optional="show"/>
+                <field name="travel_type" optional="show"/>
+                <field name="no_of_travellers" optional="show"/>
+                <field name="approved_date" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ✅ Form View -->
+    <record id="view_travel_wizard_form" model="ir.ui.view">
+        <field name="name">employe.wizard.form</field>
+        <field name="model">employe.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Customer Registration Form">
+                <header>
+                    <button name="action_create_request"
+                            type="object"
+                            string="Create Request"
+                            class="btn-primary"
+                            groups="travelmanagement.group_travel_employe_send_request"
+                            invisible="request_status != 'draft'"/>
+                    <button name="action_checked" type="object" string="Checked" class="btn-success"
+                            groups="travelmanagement.group_travel_manager_checked"
+                            readonly="request_status in ['checked']"
+                            invisible="request_status != 'checked'"/>
+                    <button name="action_approve" type="object" string="Approve" class="btn-success"
+                            groups="travelmanagement.group_travel_manager,travelmanagement.group_travel_manager_rej"
+                            invisible="not (request_status == 'approved' or request_status == 'rejected')"/>/>
+                    <button name="action_reject" type="object" string="Reject" class="btn-danger"
+                            groups="travelmanagement.group_travel_manager,travelmanagement.group_travel_manager_rej"
+                            invisible="not (request_status == 'approved' or request_status == 'rejected')"/>/>
+                    <field name="request_status" widget="statusbar"
+                           statusbar_visible="draft,checked,approved,rejected"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employe_id" readonly="request_status in ['checked', 'approved', 'rejected']"/>
+                            <field name="phone" readonly="request_status in ['checked', 'approved', 'rejected']"/>
+                            <field name="email" readonly="request_status in ['checked', 'approved', 'rejected']"/>
+                            <field name="request_date"
+                                   readonly="request_status in ['checked', 'approved', 'rejected']"/>
+                            <field name="travel_type" readonly="request_status in ['checked', 'approved', 'rejected']"/>
+                        </group>
+                        <group>
+                            <field name="end_date" readonly="request_status in ['checked', 'approved', 'rejected']"/>
+                            <field name="num_days" readonly="request_status in ['checked', 'approved', 'rejected']"/>
+                            <field name="no_of_travellers"
+                                   readonly="request_status in ['draft','checked', 'approved', 'rejected']"/>
+                            <field name="approved_date"
+                                   readonly="request_status in ['checked', 'approved', 'rejected','draft']"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Cotravellers">
+                            <field name="traveller_ids"
+                                   readonly="request_status in ['checked', 'approved', 'rejected']">
+                                <tree editable="top">
+                                    <field name="employe_id"/>
+                                    <field name="phone"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                    <footer>
+                        <button string="Send Request" type="object" name="travelwizard" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ✅ Action for MANAGERS (Tree + Form) -->
+    <record id="action_request_info" model="ir.actions.act_window">
+        <field name="name">Travel Requests</field>
+        <field name="res_model">employe.wizard</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_travel_wizard_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_sm">Create a new travel request.</p>
+        </field>
+    </record>
+
+    <!-- ✅ Action for Employees -->
+    <record id="view_employee_action" model="ir.actions.act_window">
+        <field name="name">My Travel Requests</field>
+        <field name="res_model">employe.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_travel_wizard_form"/>
+    </record>
+
+    <!-- ✅ Menu Items -->
+    <menuitem id="menu_travel_management" name="Travel Management" sequence="0"/>
+
+    <menuitem id="menu_travel_employee" name="Employee"
+              parent="menu_travel_management"
+              groups="travelmanagement.group_travel_employe_send_request"
+              action="view_employee_action" sequence="10"/>
+    <menuitem id="menu_travel_manager" name="Manager"
+              parent="menu_travel_management"
+              action="action_request_info" sequence="20"
+              groups="travelmanagement.group_travel_manager_checked"
+    />
+    <menuitem id="menu_travel_approver" name="Approver"
+              parent="menu_travel_management"
+              action="action_request_info" sequence="30"
+              groups="travelmanagement.group_travel_manager,travelmanagement.group_travel_manager_rej"
+    />
+</odoo>

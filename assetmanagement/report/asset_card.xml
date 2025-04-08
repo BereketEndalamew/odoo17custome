@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_asset_id_card">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <h2 style="text-align:center;color:white;background-color:navy">Asset Assignment Card</h2>
+                    <table>
+                        <tr class="row" style="margin-top:20px;">
+                            <td class="col-6">
+                                <strong>Asset Name:</strong>
+                                <span t-esc="o.asset_name.name"/>
+                            </td>
+                            <td class="col-6">
+                                <strong>Serial Number:</strong>
+                                <span t-esc="o.serial_number"/>
+                            </td>
+                        </tr>
+                        <tr class="row" style="margin-top:10px;">
+                            <td class="col-6">
+                                <strong>Assigned To:</strong>
+                                <span t-esc="o.employee_id.name"/>
+                            </td>
+                            <td class="col-6">
+                                <strong>Product:</strong>
+                                <span t-esc="o.product_id.name"/>
+                            </td>
+                        </tr>
+
+                        <tr class="row" style="margin-top:10px;">
+                            <td class="col-6">
+                                <strong>Assignment Date:</strong>
+                                <span t-esc="o.assignment_date"/>
+                            </td>
+                            <td class="col-6">
+                                <strong>Return Date:</strong>
+                                <span t-esc="o.return_date or 'Not returned yet'"/>
+                            </td>
+                        </tr>
+
+                        <tr class="row" style="margin-top:10px;">
+                            <td class="col-6">
+                                <strong>Status:</strong>
+                                <span t-esc="o.state"/>
+                            </td>
+                            <td class="col-6">
+                                <strong>Current State:</strong>
+                                <span t-esc="o.current_state"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <t t-field="o.asset_name.name" t-options="{'widget':'barcode','width':400, 'height':500}"/>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

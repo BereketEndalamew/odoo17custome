@@ -1,0 +1,99 @@
+<odoo>
+    <record id="view_hospital_patient_search" model="ir.ui.view">
+        <field name="name">Hospital Patient Search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <searchpanel>
+                    <field name="gender" icon="fa-users" select="multi" enable_counters="1"/>
+                </searchpanel>
+                <filter string="Male " domain="[('gender', '=', 'male')]" name="filter_male"/>
+
+                <filter string="Female " domain="[('gender', '=', 'female')]" name="filter_female"/>
+                <group string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_tree" model="ir.ui.view">
+        <field name="name">Hospital Patient Tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date_of_birth"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="phone" widget="phone"/>
+                <field name="email" widget="email"/>
+                <field name="country_id"/>
+                <field name="state_id"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_form" model="ir.ui.view">
+        <field name="name">Hospital Patient Form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="viewdata" type="object" class="oe_stat_button"
+                                icon="fa-pencil-square-o" invisible="0">
+                            <field name="appointement_count" widget="statinfo" string="Appointements"/>
+                        </button>
+                    </div>
+                </header>
+                <header>
+
+                    <button name="%(action_hospital_wizard)d" type="action" string="Create Appointement"
+                            class="oe_highlight"/>
+                    <button name="viewdata" type="object" string="View Appointement"
+                            class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date_of_birth"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                        </group>
+                        <group>
+                            <field name="phone" widget="phone"/>
+                            <field name="email" widget="email"/>
+                            <field name="country_id"/>
+                            <field name="state_id"/>
+
+                        </group>
+
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p>This is the patient list.</p>
+        </field>
+    </record>
+    <menuitem id="hospital_menu" name="Hospital" sequence="1"/>
+
+    <menuitem id="Patient_menu"
+              name="Patient"
+              parent="hospital_menu"
+              action="action_hospital_patient"
+              sequence="10"/>
+
+
+</odoo>

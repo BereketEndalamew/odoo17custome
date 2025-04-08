@@ -1,0 +1,47 @@
+<odoo>
+    <!-- Request Submitted Email -->
+    <record id="mail_template_request_submitted" model="mail.template">
+        <field name="name">Request Submitted</field>
+        <field name="model_id" ref="model_request_approval"/>
+        <field name="subject">Request Submitted: ${object.name}</field>
+        <field name="email_from">${object.requester_id.email}</field>
+        <field name="email_to">${object.approver_id.email}</field>
+        <field name="body_html">
+            <![CDATA[
+            <p>Hello ${object.approver_id.name},</p>
+            <p>The request <b>${object.name}</b> has been submitted for approval.</p>
+            <p>Please review it.</p>
+            ]]>
+        </field>
+    </record>
+
+    <!-- Request Approved Email -->
+    <record id="mail_template_request_approved" model="mail.template">
+        <field name="name">Request Approved</field>
+        <field name="model_id" ref="model_request_approval"/>
+        <field name="subject">Request Approved: ${object.name}</field>
+        <field name="email_from">${object.approver_id.email}</field>
+        <field name="email_to">${object.requester_id.email}</field>
+        <field name="body_html">
+            <![CDATA[
+            <p>Hello ${object.requester_id.name},</p>
+            <p>Your request <b>${object.name}</b> has been approved by ${object.approver_id.name}.</p>
+            ]]>
+        </field>
+    </record>
+
+    <!-- Request Rejected Email -->
+    <record id="mail_template_request_rejected" model="mail.template">
+        <field name="name">Request Rejected</field>
+        <field name="model_id" ref="model_request_approval"/>
+        <field name="subject">Request Rejected: ${object.name}</field>
+        <field name="email_from">${object.approver_id.email}</field>
+        <field name="email_to">${object.requester_id.email}</field>
+        <field name="body_html">
+            <![CDATA[
+            <p>Hello ${object.requester_id.name},</p>
+            <p>Your request <b>${object.name}</b> has been rejected by ${object.approver_id.name}.</p>
+            ]]>
+        </field>
+    </record>
+</odoo>

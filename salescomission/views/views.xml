@@ -1,0 +1,51 @@
+<odoo>
+    <!-- Tree (List) View -->
+    <record id="view_sale_commission_tree" model="ir.ui.view">
+        <field name="name">sale.commission.tree</field>
+        <field name="model">sale.commission</field>
+        <field name="arch" type="xml">
+            <tree string="Sales Commissions">
+                <field name="salesperson_id"/>
+                <field name="sale_order_id"/>
+                <field name="commission_amount"/>
+                <field name="date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_sale_commission_form" model="ir.ui.view">
+        <field name="name">sale.commission.form</field>
+        <field name="model">sale.commission</field>
+        <field name="arch" type="xml">
+            <form string="Sales Commission">
+                <sheet>
+                    <group>
+                        <field name="salesperson_id"/>
+                        <field name="sale_order_id"/>
+                        <field name="commission_amount"/>
+                        <field name="date"/>
+                        <field name="state"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_sale_commission" model="ir.actions.act_window">
+        <field name="name">Sales Commissions</field>
+        <field name="res_model">sale.commission</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>Manage sales commissions for confirmed sale orders.</p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_sales_commission_root"
+              name="Sales Commissions"
+              action="action_sale_commission"
+              sequence="0"/>
+</odoo>

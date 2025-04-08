@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="travelmanagement.list">
+      <field name="name">travelmanagement list</field>
+      <field name="model">travelmanagement.travelmanagement</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="travelmanagement.action_window">
+      <field name="name">travelmanagement window</field>
+      <field name="res_model">travelmanagement.travelmanagement</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="travelmanagement.action_server">
+      <field name="name">travelmanagement server</field>
+      <field name="model_id" ref="model_travelmanagement_travelmanagement"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="travelmanagement" id="travelmanagement.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="travelmanagement.menu_1" parent="travelmanagement.menu_root"/>
+    <menuitem name="Menu 2" id="travelmanagement.menu_2" parent="travelmanagement.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="travelmanagement.menu_1_list" parent="travelmanagement.menu_1"
+              action="travelmanagement.action_window"/>
+    <menuitem name="Server to list" id="travelmanagement" parent="travelmanagement.menu_2"
+              action="travelmanagement.action_server"/>
+-->
+  </data>
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    &lt;!&ndash; Form View for Employee Travel &ndash;&gt;-->
+<!--    <record id="view_employe_travel_form" model="ir.ui.view">-->
+<!--        <field name="name">employe.travel.form</field>-->
+<!--        <field name="model">employe.travel</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Manager Approval">-->
+<!--                <header>-->
+<!--                    <button name="open_wizard" string="Create Request" type="object" class="btn btn-primary"-->
+<!--                             invisible="[('request_status', '!=', 'draft')]"/>-->
+
+<!--                    <field name="request_status" widget="statusbar"-->
+<!--                           statusbar_invisible="draft,checked,approved,rejected" nolabel="1"/>-->
+
+<!--                    <button name="action_checked" type="object" string="✔ Checked"-->
+<!--                            class="oe_highlight" invisible="[('request_status', '!=', 'checked')]"/>-->
+<!--                    <button name="action_approved" type="object" string="✅ Approve"-->
+<!--                            class="oe_highlight" invisible="[('request_status', '!=', 'approved')]"/>-->
+<!--                    <button name="action_rejected" type="object" string="❌ Reject"-->
+<!--                            class="btn btn-danger" invisible="[('request_status', '!=', 'rejected')]"/>-->
+<!--                </header>-->
+
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group invisible="[('request_status', '!=', 'draft')]">-->
+<!--                            <field name="employe_id"/>-->
+<!--                            <field name="phone"/>-->
+<!--                            <field name="email"/>-->
+<!--                        </group>-->
+
+<!--                        <group invisible="[('request_status', '!=', 'draft')]">-->
+<!--                            <field name="request_date"/>-->
+<!--                            <field name="duration_date" />-->
+<!--                            <field name="num_days" />-->
+<!--                            <field name="no_of_travellers"/>-->
+<!--                            <field name="travel_type"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+
+<!--                    <group string="Travelers Information" >-->
+<!--                        <field name="traveller_ids">-->
+<!--                            <tree>-->
+<!--                                <field name="employe_id" invisible="[('request_status', '!=', 'draft')]"/>-->
+<!--                                <field name="phone" invisible="[('request_status', '!=', 'draft')]"/>-->
+<!--                                <field name="email" invisible="[('request_status', '!=', 'draft')]"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Tree View for Employee Travel &ndash;&gt;-->
+<!--    <record id="view_employe_travel_tree" model="ir.ui.view">-->
+<!--        <field name="name">employe.travel.tree</field>-->
+<!--        <field name="model">employe.travel</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="employe_id"/>-->
+<!--                <field name="phone" optional="show"/>-->
+<!--                <field name="email" optional="show"/>-->
+<!--                <field name="request_date" optional="show"/>-->
+<!--                <field name="duration_date" optional="show"/>-->
+<!--                <field name="travel_type" optional="show"/>-->
+<!--                <field name="num_days" optional="show"/>-->
+<!--                <field name="no_of_travellers" readonly="1" optional="show"/>-->
+<!--                <field name="request_status"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Action for Travel Requests &ndash;&gt;-->
+<!--    <record id="action_request_info" model="ir.actions.act_window">-->
+<!--        <field name="name">Travel Requests</field>-->
+<!--        <field name="res_model">employe.travel</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--        <field name="help" type="html">-->
+<!--            <p class="o_view_nocontent_sm">Create a new travel request.</p>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- Parent Menu for Travel Management -->
+<!--    <menuitem id="menu_travel_management" name="Travel Management" sequence="10"/>-->
+
+<!--    &lt;!&ndash; Submenu: Manager View &ndash;&gt;-->
+<!--    <menuitem id="menu_travel_manager" name="Manager"-->
+<!--              parent="menu_travel_management" action="action_request_info" sequence="30"/>-->
+</odoo>

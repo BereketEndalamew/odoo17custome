@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_sale_order_bereket_template" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@class='page']" position="inside">
+            <h3>Custom Sale Order Report</h3>
+            <p>
+                <strong>Customer Name:</strong>
+                <span t-esc="doc.partner_id.name"/>
+            </p>
+            <p>
+                <strong>Father's Name:</strong>
+                <span t-esc="doc.fname"/>
+            </p>
+            <p>
+                <strong>Bereket Quantity:</strong>
+                <span t-esc="doc.product_uom_qty"/>
+            </p>
+            <p>
+                <strong>Order Date:</strong>
+                <span t-esc="doc.date_order"/>
+            </p>
+            <p>
+                <strong>Total Amount:</strong>
+                <span t-esc="doc.amount_total"/>
+            </p>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,101 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_hospital_appointement_tree" model="ir.ui.view">
+        <field name="name">hospital.appointement.tree</field>
+        <field name="model">hospital.appointement</field>
+        <field name="arch" type="xml">
+            <tree string="Appointments"
+                  decoration-success="state1 == 'done'"
+                  decoration-info="state1 == 'draft'"
+                  decoration-warning="state1 == 'in_consultation'"
+                  decoration-danger="state1 == 'cancel'">
+                <field name="image" widget="image_avatar"/>
+                <field name="patient_id"/>
+                <field name="age" sum="total"/>
+                <field name="gender"/>
+                <field name="phone" widget="phone"/>
+                <field name="email" widget="email"/>
+                <field name="appointement_date"/>
+                <field name="state1" widget="badge"/>
+                <field name="appointement_count" sum="total"/>
+                <field name="docter_id" widget="many2one_avatar_user"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_hospital_appointement_form" model="ir.ui.view">
+        <field name="name">hospital.appointement.form</field>
+        <field name="model">hospital.appointement</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_draft" string="Draft" type="object" class="oe_highlight"/>
+                    <button name="action_in_consultation" string="In Consultation" type="object" class="oe_highlight"/>
+                    <button name="action_done" string="Mark as Done" type="object" class="oe_highlight"
+                            state1="in_consultation"/>
+                    <button name="action_cancel" string="Cancelled" type="object" class="oe_highlight"/>
+                    <field name="state1" widget="statusbar" statusbar_visible="draft,in_consultation,done,cancel"/>
+
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h3><field name="priority" widget="priority"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="appointement_date"/>
+                        </group>
+                        <group>
+                            <field name="phone" widget="phone"/>
+                            <field name="email" widget="email"/>
+                            <field name="docter_id" widget="many2one_avatar_user"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Prescription">
+                            <field name="prescription" placeholder="Enter a note here" options="{'collaborative': true, 'resizable': true}"/>
+                        </page>
+                        <page string="Pharmacy">
+                            <field name="pharmacy_id" widget="one2many">
+                                <tree>
+                                    <field name="product_id"/>
+                                    <field name="amount"/>
+                                    <field name="price"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="product_id"/>
+                                        <field name="amount"/>
+                                        <field name="price"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hospital_appointement" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="res_model">hospital.appointement</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p>This is the appointment list.</p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="appointement_menu"
+              name="Appointments"
+              action="action_hospital_appointement"
+              parent="hospital_menu"
+              sequence="20"/>
+</odoo>

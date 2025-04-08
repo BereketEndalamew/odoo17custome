@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    <template id="report_saleorder_custom" inherit_id="sale.report_saleorder_document">-->
+<!--        <xpath expr="//div[contains(@class, 'sale_order')]" position="inside">-->
+<!--            <div class="row mt32">-->
+<!--                <div class="col-6">-->
+<!--                    <strong>Custom Note:</strong>-->
+<!--                    <p t-esc="o.custom_note or 'N/A'"/>-->
+<!--                </div>-->
+<!--                <div class="col-6">-->
+<!--                    <strong>Expected Delivery Date:</strong>-->
+<!--                    <p t-esc="o.delivery_date or 'Not Set'"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+</odoo>

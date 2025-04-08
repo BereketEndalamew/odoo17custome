@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="assetmanagement.list">
+      <field name="name">assetmanagement list</field>
+      <field name="model">assetmanagement.assetmanagement</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="assetmanagement.action_window">
+      <field name="name">assetmanagement window</field>
+      <field name="res_model">assetmanagement.assetmanagement</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="assetmanagement.action_server">
+      <field name="name">assetmanagement server</field>
+      <field name="model_id" ref="model_assetmanagement_assetmanagement"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="assetmanagement" id="assetmanagement.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="assetmanagement.menu_1" parent="assetmanagement.menu_root"/>
+    <menuitem name="Menu 2" id="assetmanagement.menu_2" parent="assetmanagement.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="assetmanagement.menu_1_list" parent="assetmanagement.menu_1"
+              action="assetmanagement.action_window"/>
+    <menuitem name="Server to list" id="assetmanagement" parent="assetmanagement.menu_2"
+              action="assetmanagement.action_server"/>
+-->
+  </data>
+</odoo>

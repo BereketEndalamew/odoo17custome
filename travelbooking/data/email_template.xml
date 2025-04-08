@@ -1,0 +1,42 @@
+<odoo>
+    <data noupdate="1">
+
+        <!-- Travel Request Approved Email Template -->
+        <record id="email_template_travel_request_approved" model="mail.template">
+            <field name="name">Travel Request Approved</field>
+            <field name="model_id" ref="travelbooking.model_manager_approve"/>
+            <field name="email_from">${(object.company_id.email or 'admin@example.com')|safe}</field>
+            <field name="email_to">${object.email}</field>
+            <field name="subject">Your Travel Request has been Approved</field>
+            <field name="body_html"><![CDATA[
+                <p>Hello <strong>${object.employe_id.name}</strong>,</p>
+                <p>Your travel request has been <strong style="color:green;">Approved</strong>.</p>
+                <p><strong>Details:</strong></p>
+                <ul>
+                    <li><strong>Travel Type:</strong> ${object.travel_type}</li>
+                    <li><strong>Request Date:</strong> ${object.request_date}</li>
+                    <li><strong>Duration:</strong> ${object.num_days} days</li>
+                    <li><strong>Number of Travellers:</strong> ${object.no_of_travellers}</li>
+                </ul>
+                <p>Thank you.</p>
+            ]]></field>
+        </record>
+
+        <!-- Travel Request Rejected Email Template -->
+        <record id="email_template_travel_request_rejected" model="mail.template">
+            <field name="name">Travel Request Rejected</field>
+            <field name="model_id" ref="travelbooking.model_manager_approve"/>
+            <field name="email_from">${(object.company_id.email or 'admin@example.com')|safe}</field>
+            <field name="email_to">${object.email}</field>
+            <field name="subject">Your Travel Request has been Rejected</field>
+            <field name="body_html"><![CDATA[
+                <p>Hello <strong>${object.employe_id.name}</strong>,</p>
+                <p>Your travel request has been <strong style="color:red;">Rejected</strong>.</p>
+                <p>Reason: <i>The request did not meet approval criteria.</i></p>
+                <p>For further details, please contact the management team.</p>
+                <p>Thank you.</p>
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,162 @@
+<odoo>
+    <record id="view_asset_assignment_search" model="ir.ui.view">
+        <field name="name">asset.assignment.search</field>
+        <field name="model">asset.assignment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="state"/>
+                <field name="employee_id"/>
+                <field name="asset_name"/>
+
+                <group expand="0" string="Group By">
+                    <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+                    <filter name="group_employee" string="Employee" context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_asset" string="Asset" context="{'group_by': 'asset_name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- Graph View for Asset Assignments -->
+    <record id="view_asset_assignment_graph" model="ir.ui.view">
+        <field name="name">asset.assignment.graph</field>
+        <field name="model">asset.assignment</field>
+        <field name="arch" type="xml">
+            <graph string="Asset Statuses" type="pie">
+                <!-- Group by asset status -->
+                <field name="state" type="row"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Tree View for Asset Assignments -->
+    <record id="view_asset_assignment_tree" model="ir.ui.view">
+        <field name="name">asset.assignment.tree</field>
+        <field name="model">asset.assignment</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'returned'"
+                  decoration-warning="state == 'assigned'"
+                  decoration-danger="state == 'overdue'">
+                <field name="asset_name" optional="show"/>
+                <field name="serial_number" optional="show"/>
+                <field name="employee_id" optional="show"/>
+                <field name="product_id" optional="show"/>
+                <field name="assignment_date" optional="show"/>
+                <field name="return_date" optional="show"/>
+                <field name="state"/>
+                <field name="current_state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Asset Assignments -->
+    <record id="view_asset_assignment_form" model="ir.ui.view">
+        <field name="name">asset.assignment.form</field>
+        <field name="model">asset.assignment</field>
+        <field name="arch" type="xml">
+            <form string="Asset Assignment">
+                <header>
+                    <button name="action_request_return" type="object" string="Request Return"
+                            class="btn btn-primary"
+                            invisible="state != 'assigned'"/>
+                    <button name="action_verify_return" type="object" string="Verify Return"
+                            class="btn btn-success"
+                            invisible="state != 'returned'"/>
+                    <button name="action_mark_overdue" type="object" string="Overdue"
+                            class="btn btn-danger"
+                            invisible="state != 'overdue'"/>
+                    <field name="state" widget="statusbar"
+                           state="assigned,returned,overdue"/>
+                </header>
+
+                <sheet>
+                    <!-- Top Smart Buttons -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_show_assigned"
+                                type="object"
+                                icon="fa-tasks"
+                                class="btn btn-warning"
+                                string="Assigned">
+                            <field name="assigned_count" widget="statinfo" string="Assigned"/>
+                        </button>
+
+                        <button name="action_show_returned"
+                                type="object"
+                                icon="fa-check-circle"
+                                class="btn btn-success"
+                                string="Returned">
+                            <field name="returned_count" widget="statinfo" string="Returned"/>
+                        </button>
+
+                        <button name="action_show_overdue"
+                                type="object"
+                                icon="fa-exclamation-triangle"
+                                class="btn btn-danger"
+                                string="Overdue">
+                            <field name="overdue_count" widget="statinfo" string="Overdue"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_name"/>
+                            <field name="serial_number"/>
+                            <field name="product_id"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="assignment_date"/>
+                            <field name="return_date"/>
+                            <field name="state" readonly="1"/>
+                            <field name="current_state"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View for Asset Assignments -->
+    <record id="view_asset_assignment_kanban" model="ir.ui.view">
+        <field name="name">asset.assignment.kanban</field>
+        <field name="model">asset.assignment</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="asset_name"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click card">
+                            <strong>
+                                <field name="asset_name"/>
+                            </strong>
+                            <br/>
+                            <span>Employee:
+                                <field name="employee_id"/>
+                            </span>
+                            <br/>
+                            <span>Status:
+                                <field name="state"/>
+                            </span>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action to open Asset Assignments -->
+    <record id="action_asset_assignment" model="ir.actions.act_window">
+        <field name="name">Asset Assignments</field>
+        <field name="res_model">asset.assignment</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_asset_assignment_root" name="Asset Management" sequence="50"/>
+    <menuitem id="menu_asset_assignment" name="Asset Assignments"
+              parent="menu_asset_assignment_root" action="action_asset_assignment" sequence="10"/>
+
+</odoo>
