@@ -40,7 +40,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h3><field name="priority" widget="priority"/></h3>
+                        <h3>
+                            <field name="priority" widget="priority"/>
+                        </h3>
                     </div>
                     <group>
                         <group>
@@ -57,7 +59,8 @@
                     </group>
                     <notebook>
                         <page string="Prescription">
-                            <field name="prescription" placeholder="Enter a note here" options="{'collaborative': true, 'resizable': true}"/>
+                            <field name="prescription" placeholder="Enter a note here"
+                                   options="{'collaborative': true, 'resizable': true}"/>
                         </page>
                         <page string="Pharmacy">
                             <field name="pharmacy_id" widget="one2many">
@@ -93,7 +96,7 @@
     </record>
 
     <!-- Menu Item -->
-    <menuitem id="appointement_menu"
+     <menuitem id="appointement_menu"
               name="Appointments"
               action="action_hospital_appointement"
               parent="hospital_menu"

@@ -3,6 +3,8 @@
 from . import models
 from . import appointement
 from . import inherit
+from . import docter
+
 
 
 

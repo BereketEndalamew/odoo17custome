@@ -35,27 +35,27 @@
         </field>
     </record>
 
-    <record id="view_hospital_patient_form" model="ir.ui.view">
+    <record id="view_hospital_patient_view_form" model="ir.ui.view">
         <field name="name">Hospital Patient Form</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="viewdata" type="object" class="oe_stat_button"
-                                icon="fa-pencil-square-o" invisible="0">
-                            <field name="appointement_count" widget="statinfo" string="Appointements"/>
-                        </button>
-                    </div>
-                </header>
-                <header>
 
-                    <button name="%(action_hospital_wizard)d" type="action" string="Create Appointement"
+                    <button name="createData" type="object" string="Create Appointement"
                             class="oe_highlight"/>
                     <button name="viewdata" type="object" string="View Appointement"
                             class="oe_highlight"/>
                 </header>
                 <sheet>
+<!--                    smart button box-->
+                    <header>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="viewdata" type="object" class="oe_stat_button" icon="fa-calendar">
+                                <field name="appointement_count" widget="statinfo" string="Appointments"/>
+                            </button>
+                        </div>
+                    </header>
                     <group>
                         <group>
                             <field name="name"/>

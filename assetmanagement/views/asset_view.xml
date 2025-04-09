@@ -1,4 +1,5 @@
 <odoo>
+
     <record id="view_asset_assignment_search" model="ir.ui.view">
         <field name="name">asset.assignment.search</field>
         <field name="model">asset.assignment</field>

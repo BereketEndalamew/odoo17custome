@@ -23,15 +23,11 @@ class HospitalPatient(models.Model):
     email = fields.Char(string='Email')
     appointement_count = fields.Integer(
         string='Appointement Count',
-        compute='_compute_appointement_count',
+        compute='_compute_state_counts',
         store=True
     )
     country_id = fields.Many2one('res.country', string="Country", default=lambda self: self.env.ref('base.et').id)
     state_id = fields.Many2one('res.country.state', string="State/Region", domain="[('country_id', '=', country_id)]")
-
-    # city_id = fields.Many2one('res.city', string="City", domain="[('state_id', '=', state_id)]")
-    # woreda_id = fields.Many2one('res.woreda', string="Woreda", domain="[('city_id', '=', city_id)]")
-    # kebele_id = fields.Many2one('res.kebele', string="Kebele", domain="[('woreda_id', '=', woreda_id)]")
 
     def viewdata(self):
         return {
@@ -43,10 +39,19 @@ class HospitalPatient(models.Model):
             'target': 'new',
         }
 
-    @api.depends_context('uid')
-    def _compute_appointement_count(self):
+    def createData(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'View Appointements',
+            'view_mode': 'form',
+            'res_model': 'hospital.appointement',
+            'target': 'new',
+        }
+
+    @api.depends()
+    def _compute_state_counts(self):
         for record in self:
-            record.appointement_count = self.env['hospital.appointement'].search_count([('patient_id', '=', record.id)])
+            record.appointement_count = self.env['_compute_state_counts'].search_count([('patient_id', '=', self.id)])
 
     @api.depends('date_of_birth')
     def _compute_age(self):

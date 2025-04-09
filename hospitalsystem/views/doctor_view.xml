@@ -1,0 +1,62 @@
+<odoo>
+    ✅ Tree View
+    <record id="view_hospital_doctor_tree" model="ir.ui.view">
+        <field name="name">hospital.doctor.tree</field>
+        <field name="model">hospital.docter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="docter_id"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="image"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ✅ Form View -->
+    <record id="view_hospital_doctor_form" model="ir.ui.view">
+        <field name="name">hospital.doctor.form</field>
+        <field name="model">hospital.docter</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="viewPatients" type="object" class="btn btn-primary" string="Patient List"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="viewPatients"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-user-md">
+                            <field name="patient_count" widget="statinfo" string="Patients"/>
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <field name="docter_id"/>
+                        <field name="phone"/>
+                        <field name="email"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ✅ Action -->
+    <record id="action_hospital_docter" model="ir.actions.act_window">
+        <field name="name">Doctor</field>
+        <field name="res_model">hospital.docter</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p>This is the Doctor list.</p>
+        </field>
+    </record>
+
+    <!-- ✅ Menu Item -->
+    <menuitem id="doctor_menu"
+              name="Doctor"
+              parent="hospital_menu"
+              action="action_hospital_docter"
+              sequence="50"/>
+</odoo>

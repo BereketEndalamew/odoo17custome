@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # from odoo import http
-
-
+#
+#
 # class Assetmanagement(http.Controller):
-#     @http.route('/assetmanagement/assetmanagement', auth='public')
+#     @http.route('/assetmanagement/assetmanagement',website=True, auth='public')
 #     def index(self, **kw):
 #         return "Hello, world"
 

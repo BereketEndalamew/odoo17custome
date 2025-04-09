@@ -3,4 +3,4 @@ access_hospital_patient,hospital.patient,model_hospital_patient,base.group_user,
 access_hospital_appointement,hospital.appointement,model_hospital_appointement,base.group_user,1,1,1,1
 hospitalsystem.access_hospital_pharmacy,access_hospital_pharmacy,hospitalsystem.model_hospital_pharmacy,base.group_user,1,1,1,1
 access_hospital_wizard,hospital.wizard,model_hospital_wizard,,1,1,1,1
-
+hospitalsystem.access_hospital_docter,access_hospital_docter,hospitalsystem.model_hospital_docter,base.group_user,1,1,1,1
