@@ -1,0 +1,21 @@
+<odoo>
+    <record id="view_purchase_order_inherit_cancelled_button" model="ir.ui.view">
+        <field name="name">purchase.order.inherit.cancelled.button</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_cancelled_orders"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-times-circle">
+                    <!--                    <field name="cancelled_order_count" string="Cancelled Orders" class="o_stat_value"/>-->
+                    <div class="o_stat_info">
+                        <field name="cancelled_order_count" string="Cancelled Orders" class="o_stat_value"/>
+                        <span class="o_stat_text">Cancelled Orders</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
