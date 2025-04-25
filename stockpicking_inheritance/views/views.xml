@@ -1,0 +1,46 @@
+<odoo>
+  <template id="report_deliveryslip_document_custom" inherit_id="stock.report_picking">
+    <xpath expr="//div[@class='page']" position="inside">
+      <t t-foreach="docs" t-as="doc">
+        <div class="mt-4 mb-4">
+          <h4 class="text-white bg-success p-2 rounded text-center">Delivery Order Info</h4>
+          
+          <!-- Delivery Info Table -->
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead class="bg-light text-black">
+                <tr>
+                  <th>Reference</th>
+                  <th>Contact</th>
+                  <th>Scheduled Date</th>
+                  <th>Source Document</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-secondary text-white">
+                  <td><span t-esc="doc.name"/></td>
+                  <td><span t-esc="doc.partner_id.display_name"/></td>
+                  <td>
+                    <span t-esc="doc.scheduled_date.strftime('%Y-%m-%d %H:%M') if doc.scheduled_date else ''"/>
+                  </td>
+                  <td><span t-esc="doc.origin"/></td>
+                  <td><span t-esc="doc.state"/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- <div class="text-center mt-4">
+            <h5>Scan Barcode</h5>
+            <div>
+              <h3>Picking Barcode</h3>
+              <img t-att-src="\'data:image/png;base64,%s\' % doc.get_barcode_img()" width="300" height="80" alt="Barcode"/>
+            </div>
+          </div> -->
+
+        </div>
+      </t>
+    </xpath>
+  </template>
+</odoo>
