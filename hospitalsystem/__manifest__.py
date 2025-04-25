@@ -18,7 +18,7 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','mail','sale','hr'],
+    'depends': ['base', 'mail', 'sale', 'hr','report_xlsx'],
 
     # always loaded
     'data': [
@@ -26,17 +26,19 @@ Long description of module's purpose
         'views/patient_view.xml',
         'views/appointement_view.xml',
         'views/doctor_view.xml',
+        'views/views.xml',
         'views/menu.xml',
+        'report/report.xml',
+        'report/patient_card.xml',
         # 'wizard/travel_booking.xml',
         # 'views/views.xml',
-        # 'data/ir_crone.xml',
+        'data/email_template.xml',
         # 'report/report_template.xml',
         # 'report/sale_order_report.xml',
         # 'views/templates.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
-}
-
+        # only loaded in demonstration mode
+        'demo': [
+            'demo/demo.xml',
+        ],
+    }

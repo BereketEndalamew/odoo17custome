@@ -1,4 +1,25 @@
 <odoo>
+    <record id="view_hospital_appointement_search" model="ir.ui.view">
+        <field name="name">Hospital Appointement Search</field>
+        <field name="model">hospital.appointement</field>
+        <field name="arch" type="xml">
+            <search>
+                <!--                <searchpanel>-->
+                <!--                    <field name="gender" icon="fa-users" select="multi" enable_counters="1"/>-->
+                <!--                </searchpanel>-->
+                <!--                <filter string="Male " domain="[('gender', '=', 'male')]" name="filter_male"/>-->
+
+<!--                <filter string="Appointments in Date Range"-->
+<!--                        name="filter_date_range"-->
+<!--                        domain="[('appointement_date', '&gt;=', context.get('start_date', True)),-->
+<!--                                ('appointement_date', '&lt;=', context.get('end_date', True))]"/>-->
+
+                <!--                <group string="Group By">-->
+                <!--                    <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>-->
+                <!--                </group>-->
+            </search>
+        </field>
+    </record>
     <!-- Tree View -->
     <record id="view_hospital_appointement_tree" model="ir.ui.view">
         <field name="name">hospital.appointement.tree</field>
@@ -9,17 +30,39 @@
                   decoration-info="state1 == 'draft'"
                   decoration-warning="state1 == 'in_consultation'"
                   decoration-danger="state1 == 'cancel'">
+                <header>
+                    <button name="Appointements"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-user-md">
+                        <field name="draft_count" widget="statinfo" string="Patients"/>
+                    </button>
+                </header>
+                <!--                <field name="start_date"/>-->
+                <!--                <field name="end_date"/>-->
                 <field name="image" widget="image_avatar"/>
-                <field name="patient_id"/>
-                <field name="age" sum="total"/>
-                <field name="gender"/>
-                <field name="phone" widget="phone"/>
-                <field name="email" widget="email"/>
-                <field name="appointement_date"/>
-                <field name="state1" widget="badge"/>
+                <field name="patient_id" readonly="1"/>
+                <field name="age" sum="total" readonly="1"/>
+                <field name="gender" readonly="1"/>
+                <field name="phone" widget="phone" readonly="1"/>
+                <field name="email" widget="email" readonly="1"/>
+                <field name="appointement_date" readonly="1"/>
+                <field name="state1" widget="badge" readonly="1"/>
                 <field name="appointement_count" sum="total"/>
                 <field name="docter_id" widget="many2one_avatar_user"/>
             </tree>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="view_hospital_appointement_graph" model="ir.ui.view">
+        <field name="name">hospital.appointement.graph</field>
+        <field name="model">hospital.appointement</field>
+        <field name="arch" type="xml">
+            <graph string="Appointments by State">
+                <field name="state1" type="col"/>
+                <field name="appointement_count" type="measure"/>
+            </graph>
         </field>
     </record>
 
@@ -36,7 +79,6 @@
                             state1="in_consultation"/>
                     <button name="action_cancel" string="Cancelled" type="object" class="oe_highlight"/>
                     <field name="state1" widget="statusbar" statusbar_visible="draft,in_consultation,done,cancel"/>
-
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -45,11 +87,14 @@
                         </h3>
                     </div>
                     <group>
+
                         <group>
                             <field name="patient_id"/>
                             <field name="age"/>
                             <field name="gender"/>
                             <field name="appointement_date"/>
+                            <!--                            <field name="start_date"/>-->
+                            <!--                            <field name="end_date"/>-->
                         </group>
                         <group>
                             <field name="phone" widget="phone"/>
@@ -83,22 +128,25 @@
             </form>
         </field>
     </record>
-
     <!-- Action -->
-    <record id="action_hospital_appointement" model="ir.actions.act_window">
+    <record id="action_hospital_appointement2" model="ir.actions.act_window">
         <field name="name">Appointments</field>
         <field name="res_model">hospital.appointement</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,graph</field>
         <field name="context">{}</field>
         <field name="help" type="html">
             <p>This is the appointment list.</p>
         </field>
     </record>
 
+
     <!-- Menu Item -->
-     <menuitem id="appointement_menu"
+
+
+    <menuitem id="appointement_menu"
               name="Appointments"
-              action="action_hospital_appointement"
+              action="action_hospital_appointement2"
               parent="hospital_menu"
-              sequence="20"/>
+              sequence="30"/>
+
 </odoo>

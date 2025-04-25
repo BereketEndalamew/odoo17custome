@@ -7,7 +7,13 @@
                 <searchpanel>
                     <field name="gender" icon="fa-users" select="multi" enable_counters="1"/>
                 </searchpanel>
-                <filter string="Male " domain="[('gender', '=', 'male')]" name="filter_male"/>
+
+                    <filter string="Date of Birth in Date Range"
+                        name="filter_date_range"
+                        domain="[('date_of_birth', '&gt;=', context.get('start_date1')),
+                            ('date_of_birth', '&lt;=', context.get('end_date1'))]"
+                    />
+                
 
                 <filter string="Female " domain="[('gender', '=', 'female')]" name="filter_female"/>
                 <group string="Group By">
@@ -16,12 +22,13 @@
             </search>
         </field>
     </record>
-
     <record id="view_hospital_patient_tree" model="ir.ui.view">
         <field name="name">Hospital Patient Tree</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="start_date1"/>
+                <field name="end_date1"/>
                 <field name="name"/>
                 <field name="date_of_birth"/>
                 <field name="age"/>
@@ -41,14 +48,23 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="send_patient_email"
+                            type="object"
+                            string="Send Email"
+                            class="btn-secondary"
+                            icon="fa-envelope"/>
+
 
                     <button name="createData" type="object" string="Create Appointement"
                             class="oe_highlight"/>
                     <button name="viewdata" type="object" string="View Appointement"
                             class="oe_highlight"/>
+                            class="oe_highlight"/>
+                            class="oe_highlight"/>
                 </header>
                 <sheet>
-<!--                    smart button box-->
+                    <!--                    smart button box-->
+                    <!--                    smart button box-->
                     <header>
                         <div class="oe_button_box" name="button_box">
                             <button name="viewdata" type="object" class="oe_stat_button" icon="fa-calendar">
@@ -58,10 +74,16 @@
                     </header>
                     <group>
                         <group>
+                            <!-- Other fields here -->
+                            <field name="qr_code" widget="qr_code" options="{'preview_image': False}" readonly="1"/>
+                        </group>
+                        <group>
                             <field name="name"/>
                             <field name="date_of_birth"/>
                             <field name="age"/>
                             <field name="gender"/>
+                            <field name="start_date1"/>
+                            <field name="end_date1"/>
                         </group>
                         <group>
                             <field name="phone" widget="phone"/>
@@ -88,12 +110,9 @@
         </field>
     </record>
     <menuitem id="hospital_menu" name="Hospital" sequence="1"/>
-
     <menuitem id="Patient_menu"
               name="Patient"
               parent="hospital_menu"
               action="action_hospital_patient"
               sequence="10"/>
-
-
 </odoo>

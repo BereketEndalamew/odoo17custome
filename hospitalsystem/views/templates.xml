@@ -1,28 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="view_order_form_inherit" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <!--                <field name="order_reference"/>-->
-                <field name="fname"/>
-                <field name="product_uom_qty"/>
-
-
-            </xpath>
-        </field>
-    </record>
-    <record id="view_order_tree_inherit" model="ir.ui.view">
-        <field name="name">sale.order.tree.inherit</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_tree"/>
-        <field name="arch" type="xml">
-            <xpath expr="//tree" position="inside">
-                <!--                <field name="order_reference"/>-->
-                <field name="fname"/>
-                <field name="product_uom_qty"/>
-            </xpath>
-        </field>
-    </record>
+    <template id="hospital_appointment_template" name="Hospital Appointment">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <h1 class="text-center">Hospital Appointments</h1>
+                <div id="appointment-stats" class="text-center mt-4">
+                    <!-- Dynamic content will be loaded here via JS -->
+                    <p>Loading appointment stats...</p>
+                </div>
+            </div>
+        </t>
+    </template>
 </odoo>

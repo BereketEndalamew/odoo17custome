@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="email_template_hospital_patient" model="mail.template">
+            <field name="name">Patient Notification</field>
+            <field name="model_id" ref="model_hospital_patient"/>
+            <field name="subject">Patient Info: ${object.name}</field>
+            <field name="email_from">admin@gmail.com|safe</field>
+            <field name="email_to">bereketendalamew@gmail.com|safe</field>
+            <field name="body_html" type="html">
+                    <p>Dear ${object.name},</p>
+                    <p>This is a notification regarding your patient profile in our system.</p>
+                    <p><strong>Details:</strong></p>
+                    <ul>
+                        <li>Name: ${object.name}</li>
+                        <li>Age: ${object.age}</li>
+                        <li>Gender: ${object.gender}</li>
+                        <li>Phone: ${object.phone}</li>
+                        <li>Email: ${object.email}</li>
+                    </ul>
+                    <p>Best regards,<br/>Hospital Team</p>
+
+            </field>
+        </record>
+    </data>
+</odoo>

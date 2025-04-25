@@ -8,7 +8,7 @@
 # class City(models.Model):
 #     _name = "res.city"
 #     _description = "City"
-#
+
 #     name = fields.Char(string="City Name", required=True)
 #     state_id = fields.Many2one('res.country.state', string="State", required=True)
 #     woreda_ids = fields.One2many('res.woreda', 'city_id', string="Woredas")

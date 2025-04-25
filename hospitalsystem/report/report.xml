@@ -1,34 +1,35 @@
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<odoo>-->
-<!--&lt;!&ndash;    &ndash;&gt;-->
-<!--&lt;!&ndash;    <record id="report_patient_details" model="ir.actions.report">&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="name">Patient Details</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="model">hospital.patient</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="report_type">qweb-pdf</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="report_name">om_hospital.report_patient_detail</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="report_file">om_hospital.report_patient_detail</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="binding_model_id" ref="model_hospital_patient"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="binding_type">report</field>&ndash;&gt;-->
-<!--&lt;!&ndash;    </record>&ndash;&gt;-->
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
 
-<!--    <record id="report_sale_order_card" model="ir.actions.report">-->
-<!--        <field name="name">Patient Card</field>-->
-<!--        <field name="model">sale.order</field>-->
-<!--        <field name="report_type">qweb-pdf</field>-->
-<!--        <field name="report_name">sale.report_patient_id_card</field>-->
-<!--        <field name="report_file">sale.report_patient_id_card</field>-->
-<!--        <field name="binding_model_id" ref="model_sale_order"/>-->
-<!--        <field name="binding_type">report</field>-->
-<!--    </record>-->
+    <record id="report_patient_details" model="ir.actions.report">
+        <field name="name">Patient Details</field>
+        <field name="model">hospital.patient</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hospitalsystem.report_patient_detail</field>
+        <field name="report_file">hospitalsystem.report_patient_detail</field>
+        <field name="binding_model_id" ref="model_hospital_patient"/>
+        <field name="binding_type">report</field>
+    </record>
 
-<!--&lt;!&ndash;    <record id="report_patient_card_xls" model="ir.actions.report">&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="name">Patient Card Excel</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="model">hospital.patient</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="report_type">xlsx</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="report_name">om_hospital.report_patient_id_card_xls</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="report_file">om_hospital.report_patient_id_card_xls</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="binding_model_id" ref="model_hospital_patient"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="binding_type">report</field>&ndash;&gt;-->
-<!--&lt;!&ndash;    </record>&ndash;&gt;-->
+    <record id="report_patient_card" model="ir.actions.report">
+        <field name="name">Patient Card</field>
+        <field name="model">hospital.patient</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hospitalsystem.report_patient_id_card</field>
+        <field name="report_file">hospitalsystem.report_patient_id_card</field>
+        <field name="binding_model_id" ref="model_hospital_patient"/>
+        <field name="binding_type">report</field>
+    </record>
 
-<!--</odoo>-->
+    <record id="report_patient_card_xls" model="ir.actions.report">
+        <field name="name">Patient Card Excel</field>
+        <field name="model">hospital.patient</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">hospitalsystem.report_patient_id_card_xls</field>
+        <field name="report_file">hospitalsystem.report_patient_id_card_xls</field>
+        <field name="binding_model_id" ref="model_hospital_patient"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+</odoo>

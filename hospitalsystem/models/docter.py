@@ -25,5 +25,5 @@ class hospitalDocter(models.Model):
             'view_mode': 'tree,form',
             'res_model': 'hospital.appointement',
             'domain': [('docter_id', '=', self.docter_id.id)],
-            'target': 'self',
+            'target': 'new',
         }

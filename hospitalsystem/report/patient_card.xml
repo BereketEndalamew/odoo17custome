@@ -1,67 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <template id="report_patient_id_card">
+    <template id="hospitalsystem.report_patient_id_card">
         <t t-foreach="docs" t-as="o">
             <t t-call="web.basic_layout">
                 <div class="page">
                     <div class="oe_structure"/>
                     <div class="row">
-                        <div class="col-xs-8">
-                            <table class="table table-condensed" style="border: 3px solid black !important;">
+                        <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+                            <thead style="background-color: #f2f2f2;">
                                 <tr>
-                                    <td width="40%">
-                                        <p style="text-align:center;padding-top:10px;">
-                                            <img t-if="not o.image"
-                                                 t-att-src="'/web/static/src/img/placeholder.png'" height="140"
-                                                 border="1" width="120"/>
-                                            <img t-if="o.image"
-                                                 t-att-src="'data:image/png;base64,%s' % to_text(o.image)"
-                                                 height="140" border="1" width="120"/>
-                                        </p>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Full Name</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Date of Birth</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Age</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Email Address</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Gender</th>
+                                    <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Country</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">
+                                        <span t-esc="o.name"/>
                                     </td>
-                                    <td width="60%">
-                                        <table>
-                                            <tr>
-                                                <td colspan="3" class="text-center">
-                                                    <span t-field="o.name"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span>
-                                                        <strong>Age:</strong>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span>:</span>
-                                                </td>
-                                                <td>
-                                                    <span t-field="o.age"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span>
-                                                        <strong>Reference:</strong>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span>:</span>
-                                                </td>
-                                                <td>
-                                                    <span t-field="o.reference"/>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">
+                                        <span t-esc="o.date_of_birth"/>
+                                    </td>
+                                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">
+                                        <span t-esc="o.age"/>
+                                    </td>
+                                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">
+                                        <span t-esc="o.email"/>
+                                    </td>
+                                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">
+                                        <span t-esc="o.gender"/>
+                                    </td>
+                                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">
+                                        <span t-esc="o.country_id"/>
                                     </td>
                                 </tr>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
+
+                    <!-- QR Code Section -->
+                    <div>
+                        <h3>Patient: <t t-esc="doc.name"/></h3>
+                        <img t-if="doc.qr_code" t-att-src="'data:image/png;base64,' + doc.qr_code.decode('utf-8')"/>
+                    </div>
+
                 </div>
             </t>
         </t>
     </template>
-
 </odoo>

@@ -33,9 +33,9 @@
                     </div>
                     <field name="image" widget="image" class="oe_avatar"/>
                     <group>
-                        <field name="docter_id"/>
+                        <field name="docter_id" copy="False"/>
                         <field name="phone"/>
-                        <field name="email"/>
+                        <field name="email" copy="False"/>
                     </group>
                 </sheet>
             </form>
