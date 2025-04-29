@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_email_notification_email_notification,email_notification.email_notification,model_email_notification_email_notification,base.group_user,1,1,1,1

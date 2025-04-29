@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="module_category_crm_notifications" model="ir.module.category">
+            <field name="name">CRM Notifications</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- Notification Group: Users who get notified when a lead is qualified -->
+        <record id="group_notify_on_qualified" model="res.groups">
+            <field name="name">CRM Stage Notify / On Qualified</field>
+            <field name="category_id" ref="module_category_crm_notifications"/>
+        </record>
+
+    </data>
+</odoo>
