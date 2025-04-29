@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Action to open Purchase Request tree view -->
+        <record id="action_purchase_request" model="ir.actions.act_window">
+            <field name="name">Purchase Requests</field>
+            <field name="res_model">purchase.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create Purchase Requests from Store Requests</p>
+            </field>
+        </record>
+
+        <!-- Menuitem for Purchase Requests -->
+        <menuitem id="purchase_request_main_menu" name="Purchase Request" sequence="50" web_icon="store_request,static/img/pr.png" />
+        <menuitem id="menu_purchase_request" name="Purchase Requests" parent="purchase_request_main_menu" action="action_purchase_request"/>
+
+        <!-- Form view for Purchase Request -->
+        <record id="view_purchase_request_form" model="ir.ui.view">
+            <field name="name">purchase.request.form</field>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                <form string="Purchase Request" create="0">
+                    <header>
+                        <field name="purchase_type" invisible="1"/>
+                        <field name="state" invisible="1"/>
+
+                        <button name="action_submit"  invisible="state !='draft'" string="Submit" type="object" class="oe_highlight"/>
+                        <button name="action_approve"  invisible="state !='to_approve'" string="Approve" type="object" class="oe_highlight" groups="store_request.group_purchase_manager"/>
+                        <button name="reset_draft"   string="Reset To Draft" type="object" class="oe_highlight btn btn-warning fa fa-undo" 
+                                              invisible="state in ['draft','tender','direct_purchase']"
+                                       />
+
+
+                        <!-- Purchase type specific buttons -->
+                        <button name="action_create_purchase_order"  string="Create Direct Purchase" type="object" class="oe_highlight"
+                         invisible="state !='approved' or purchase_type != 'direct'"
+                         />
+                        <button name="create_purchase_tender"  string="Create Purchase Tender" type="object" class="oe_highlight" invisible="state !='approved' or purchase_type == 'direct'"/>
+
+                        <button name="action_open_purchase_tender_transit"  invisible="state != 'tender'" type="object" string="Open Winners" class="oe_highlight"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,to_approve,approved,tender,direct_purchase"/>
+                    </header>
+
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button name="purchase_tender_action" string="Purchase Tender" type="object" class="oe_stat_button" icon="fa-list"  invisile="purchase_type == 'direct'">
+                                <field name="purchase_tender_count" widget="statinfo"/>
+                            </button>
+
+                            <button name="purchase_order_action" string="Purchase Orders" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+                                <field name="purchase_order_count" widget="statinfo"/>
+                            </button>
+                        </div>
+
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="store_request_id" readonly="1"/>
+                                <field name="vendor_id"  readonly="purchase_type != 'direct'"/>
+                                <field name="effective_date"/>
+                                <field name="purchase_type" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="market" widget="radio" options="{'horizontal': true}" readonly="state !='draft'" />
+                                <field name="transportation" widget="radio" options="{'horizontal': true}" readonly="state !='draft'"/>
+                                <field name="urgency" widget="radio" options="{'horizontal': true}" readonly="state !='draft'"/>
+                            </group>
+                            <group>
+                                <field name="checked_by" readonly="1"/>
+                                <field name="checked_date" readonly="1"/>
+                                <field name="approved_by" readonly="1"/>
+                                <field name="approved_date" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Request Lines">
+                                <field name="request_lines" readonly="state != 'to_approve'">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="quantity"/>
+                                        <field name="unit_price"/>
+                                        <field name='current_market_price' />
+                                        <field name="uom_id"/>
+                                        <field name="remark"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for Purchase Request -->
+        <record id="view_purchase_request_tree" model="ir.ui.view">
+            <field name="name">purchase.request.tree</field>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                <tree string="Purchase Requests" create="0" decoration-info="state == 'draft'" decoration-warning="state == 'to_approve'" decoration-success="state in ('validate', 'direct_purchase')">
+                    <field name="name"/>
+                    <field name="store_request_id"/>
+                    <field name="purchase_type"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Purchase Order Inherited Views -->
+        <record id="view_purchase_order_form_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="ref" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_purchase_order_tree_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.tree.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="transit_id" readonly="1"/>
+                    <field name="ref" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

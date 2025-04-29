@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <record id="seq_store_request_id" model="ir.sequence">
+            <field name="name">Store Request Sequence</field>
+            <field name="code">store.request</field>
+            <field name="prefix">SR/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"></field>
+        </record>
+
+        <record id="seq_equipment_request_id" model="ir.sequence">
+            <field name="name">Equipment Request Sequence</field>
+            <field name="code">equipment.request</field>
+            <field name="prefix">ER/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"></field>
+        </record>
+
+        <record id="seq_equipment_issue" model="ir.sequence">
+            <field name="name">Equipment Issue Sequence</field>
+            <field name="code">equipment.issue</field>
+            <field name="prefix">EQ-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_purchase_request_id" model="ir.sequence">
+            <field name="name">Purchase Request Sequence</field>
+            <field name="code">purchase.request</field>
+            <field name="prefix">PR/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"></field>
+        </record>
+
+         <record id="seq_store_issue_id" model="ir.sequence">
+            <field name="name">Store Issue Sequence</field>
+            <field name="code">store.issue.voucher</field>
+            <field name="prefix">SIV/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"></field>
+        </record>
+
+         <record id="seq_purchase_tender_id" model="ir.sequence">
+            <field name="name">Purchase Tender Sequence</field>
+            <field name="code">purchase.tender</field>
+            <field name="prefix">TEN-/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"></field>
+        </record>
+
+         <record id="seq_purchase_tender_winner_id" model="ir.sequence">
+            <field name="name">Purchase Tender Winners Sequence</field>
+            <field name="code">purchase.tender.transit</field>
+            <field name="prefix">WINNER-/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"></field>
+        </record>
+    </data>
+</odoo>

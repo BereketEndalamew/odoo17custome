@@ -1,0 +1,30 @@
+<record id="view_res_config_settings_inherited" model="ir.ui.view">
+    <field name="name">res.config.settings.inherit.custom.theme</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/> <!-- ✅ Corrected reference -->
+    <field name="arch" type="xml">
+        <xpath expr="//div[contains(@class, 'o_setting_container')]" position="inside">
+            <div class="app_settings_block" data-string="Theme Customization">
+                <h2>Theme Customization</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-6">
+                        <field name="brand_color"/>
+                        <field name="primary_color"/>
+                        <field name="menu_text_color"/>
+                        <field name="apps_text_color"/>
+                        <field name="apps_active_color"/>
+                        <field name="background_color"/>
+                    </div>
+                    <div class="col-6">
+                        <field name="info_color"/>
+                        <field name="success_color"/>
+                        <field name="warning_color"/>
+                        <field name="danger_color"/>
+                        <field name="background_image" filename="background_image_filename"/>
+                        <field name="logo" filename="logo_filename"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </field>
+</record>

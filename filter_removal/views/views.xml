@@ -1,0 +1,12 @@
+<record id="view_job_filter_inherit" model="ir.ui.view">
+    <field name="name">hr.job.search.remove.custom.filters</field>
+    <field name="model">hr.job</field>
+    <field name="inherit_id" ref="hr.view_job_filter"/>
+    <field name="arch" type="xml">
+        <!-- Remove Department group filter -->
+        <xpath expr="//search/group/filter[@name='department_id']" position="replace"/>
+
+        <!-- Or to remove all group filters -->
+        <!-- <xpath expr="//search/group" position="replace"/> -->
+    </field>
+</record>

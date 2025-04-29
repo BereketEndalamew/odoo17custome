@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+
+        <!-- Action: Project Tags -->
+        <record id="action_project_tags" model="ir.actions.act_window">
+            <field name="name">Project Tags</field>
+            <field name="res_model">dashboard.dashboard</field> <!-- Your model for Tags -->
+          <field name="tag">dashboard_dashboard</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+
+            </field>
+        </record>
+
+        <!-- Menu: Under the Projects menu -->
+        <menuitem id="menu_project_tags"
+                  name="Project Tags"
+                  parent="hospital_menu"
+                  action="action_project_tags"
+                  sequence="5" />
+
+    </data>
+</odoo>

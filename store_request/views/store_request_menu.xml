@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Top level menu for Store Requests -->
+        <menuitem id="menu_store_request" name="Store Requests" sequence="40" web_icon="store_request,static/img/sr.png"/>
+ 
+        <!-- Submenu item to access Store Requests -->
+        <menuitem id="menu_store_request_requests" name="Store Requests" parent="menu_store_request" action="action_store_request"  sequence='3'/>
+        <menuitem id="menu_equipment_request_requests" name="Equipment Requests" parent="menu_store_request" action="action_equipment_request" sequence='4'/>
+        <menuitem id="menu_equipment_issue"
+                name="Equipment Issues"
+                parent="menu_store_request"
+                action="action_equipment_issue"
+                sequence="5"/>
+        <!-- Action to open Store Request tree view -->
+<!--        <act_window id="action_store_request" name="Store Requests" res_model="store.request" view_mode="tree,form"/>-->
+    </data>
+</odoo>

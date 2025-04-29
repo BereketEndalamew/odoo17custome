@@ -1,0 +1,58 @@
+<odoo>
+    <record id="view_purchase_tender_transit_tree" model="ir.ui.view">
+    <field name="name">purchase.tender.transit.tree</field>
+    <field name="model">purchase.tender.transit</field>
+    <field name="arch" type="xml">
+        <tree create='0'>
+            <field name="vendor_id"/>
+            <field name="product_count"/>
+            <field name="request_id"/>
+            <!-- <field name="tender_id"/> -->
+        </tree>
+    </field>
+    </record>
+
+    <record id="view_purchase_tender_transit_form" model="ir.ui.view">
+        <field name="name">purchase.tender.transit.form</field>
+        <field name="model">purchase.tender.transit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div name="button_box" position="inside">
+                        <button name="purchase_order_action" string="Purchase Order Action " type="object"  class="oe_stat_button">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="purchase_order_count" invisible="0"/>
+                                </span>
+                                <span class="o_stat_text">Purchase Order</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="vendor_id"/>
+                        <field name="request_id"/>
+                    </group>
+                    <field name="transit_line_ids">
+                        <tree>
+                            <field name="tender_id"/>
+                            <field name="product_id"/>
+                            <field name="product_qty"/>
+                            <field name="product_uom"/>
+                            <field name="price_unit"/>
+                        </tree>
+                    </field>
+                    <button name="create_po_for_vendor" type="object" string="Create Purchase Order" class="oe_highlight" invisible="purchase_order_count != 0"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_purchase_tender_transit" model="ir.actions.act_window">
+        <field name="name">Winners</field>
+        <field name="res_model">purchase.tender.transit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_purchase_tender_transit" name="Winners" parent="purchase_request_main_menu" action="action_purchase_tender_transit"/>
+
+</odoo>

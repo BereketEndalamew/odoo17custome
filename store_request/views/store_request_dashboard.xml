@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Store Request Status Graph View -->
+        <record id="view_store_request_status_graph" model="ir.ui.view">
+            <field name="name">store.request.status.graph</field>
+            <field name="model">store.request</field>
+            <field name="arch" type="xml">
+                <graph type="pie" sample="1">
+                    <field name="state"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Purchase Request Type Graph View -->
+        <record id="view_purchase_request_type_graph" model="ir.ui.view">
+            <field name="name">purchase.request.type.graph</field>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                <graph type="pie" sample="1">
+                    <field name="purchase_type"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Store Request Dashboard Action -->
+        <record id="action_store_request_status_dashboard" model="ir.actions.act_window">
+            <field name="name">Store Requests by Status</field>
+            <field name="res_model">store.request</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_store_request_status_graph"/>
+            <field name="domain">[('state', 'in', ['on siv', 'on request'])]</field>
+        </record>
+
+        <!-- Purchase Request Dashboard Action -->
+        <record id="action_purchase_request_type_dashboard" model="ir.actions.act_window">
+            <field name="name">Purchase Requests by Type</field>
+            <field name="res_model">purchase.request</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_purchase_request_type_graph"/>
+        </record>
+
+        <!-- Dashboard Menu Items -->
+        <menuitem id="menu_store_request_dashboard"
+                  name="Dashboards"
+                  parent="menu_store_request"
+                  sequence="1"/>
+
+        <menuitem id="menu_store_request_status_dashboard"
+                  name="Store Requests by Status"
+                  parent="menu_store_request_dashboard"
+                  action="action_store_request_status_dashboard"
+                  sequence="1"/>
+
+        <menuitem id="menu_purchase_request_type_dashboard"
+                  name="Purchase Requests by Type"
+                  parent="menu_store_request_dashboard"
+                  action="action_purchase_request_type_dashboard"
+                  sequence="2"/>
+    </data>
+</odoo>

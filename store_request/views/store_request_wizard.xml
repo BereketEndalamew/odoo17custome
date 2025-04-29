@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Purchase Wizard Form View -->
+    <record id="view_store_request_purchase_wizard_form" model="ir.ui.view">
+        <field name="name">store.request.purchase.wizard.form</field>
+        <field name="model">store.request.purchase.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Purchase Request">
+                <sheet>
+                    <group>
+                        <field name="store_request_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Products to Purchase" name="products_to_purchase">
+                            <field name="line_ids" nolabel="1" options="{'no_create': True, 'no_open': True}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="selected"/>
+                                    <field name="product_id" readonly="1"/>
+                                    <field name="uom_id" />
+                                    <field name="requested_quantity" readonly="1"/>
+                                    <field name="available_quantity" readonly="1"/>
+                                    <field name="quantity_to_purchase" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="action_create_purchase_request" string="Create Purchase Request" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- SIV Wizard Form View -->
+    <record id="view_store_request_siv_wizard_form" model="ir.ui.view">
+        <field name="name">store.request.siv.wizard.form</field>
+        <field name="model">store.request.siv.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Store Issue Voucher">
+                <sheet>
+                    <group>
+                        <field name="store_request_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Products to Issue" name="products_to_issue">
+                            <field name="line_ids" nolabel="1" options="{'no_create': True, 'no_open': True}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="selected"/>
+                                    <field name="product_id" readonly="1"/>
+                                    <field name="uom_id" />
+                                    <field name="requested_quantity" readonly="1"/>
+                                    <field name="available_quantity" readonly="1"/>
+                                    <field name="quantity_to_issue"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="action_create_siv" string="Create SIV" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Window Actions -->
+    <record id="action_store_request_purchase_wizard" model="ir.actions.act_window">
+        <field name="name">Create Purchase Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">store.request.purchase.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_store_request_siv_wizard" model="ir.actions.act_window">
+        <field name="name">Create Store Issue Voucher</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">store.request.siv.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

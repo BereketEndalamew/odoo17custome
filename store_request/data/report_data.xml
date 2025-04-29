@@ -1,0 +1,10 @@
+<odoo>
+    <report
+        id="action_report_delivery_slip_custom"
+        model="stock.picking"
+        string="Custom Delivery Slip"
+        report_type="qweb-pdf"
+        name="store_request.report_stockpicking_custom"
+        file="store_request.report_stockpicking_custom"
+        attachment_use="False"/>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_picking_form_custom" model="ir.ui.view">
+        <field name="name">stock.picking.form.custom</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <!-- Add fields to the form -->
+            <xpath expr="//field[@name='origin']" position="after">
+                    <!-- <field name="purchase_requisition_no"/>
+                    <field name="purchase_order_no"/>
+                    <field name="delivery_type"  widget="radio" options="{'horizontal': true}"/> -->
+                    <!-- <field name="item_type" widget="radio" options="{'horizontal': true}"/> -->
+            </xpath>
+            <!-- <xpath expr="//field[@name='picking_type_id']" position="after">
+                    <field name="supplier_invoice_no"/>
+                    <field name="lc_no"/>
+                    <field name="location_id"/>
+                    <field name="store_code"/>
+                    <field name="classification" widget="radio"/>
+            </xpath> -->
+        </field>
+    </record>
+        
+</odoo>

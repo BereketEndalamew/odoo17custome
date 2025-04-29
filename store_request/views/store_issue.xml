@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form view for Store Issue Voucher -->
+        <record id="view_store_issue_voucher_form" model="ir.ui.view">
+            <field name="name">store.issue.voucher.form</field>
+            <field name="model">store.issue.voucher</field>
+            <field name="arch" type="xml">
+                <form string="Store Issue Voucher">
+                     <header>
+<field name="stock_pick_count" invisible="1"/>
+                         <button name="action_submit"  invisible="state != 'draft'" string="Submit" type="object" class="oe_highlight" groups="store_request.group_store_manager"/>
+                         <button name="action_validate" invisible="state != 'approve'" string="Validate" type="object" class="oe_highlight"  groups="store_request.group_store_manager" />
+                         <button name="action_approve"  invisible="state != 'submit'" string="Approve" type="object" class="oe_highlight"  groups="store_request.group_store_manager" />
+                         <button name="create_transfer"  invisible="state != 'validate' or stock_pick_count != 0" string="Create Transfer" type="object" class="oe_highlight"  groups="store_request.group_store_manager" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submit,approve,validate"  />
+                    </header>
+                    <sheet>
+                         <div name="button_box" position="inside">
+
+                              <button name="stock_pick_action"
+                           string="Stock Pick Action " type="object"  class="oe_stat_button">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                 <field name="stock_pick_count" invisible="0"/>
+                            </span>
+                            <span class="o_stat_text">Transfer</span>
+                        </div>
+                    </button>
+                </div>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <!-- <field name="location_id" /> -->
+                                <!-- <field name="date"/> -->
+                                <field name="effective_date"/>
+                                <field name="is_equipment"  invisible="1" />
+                                <field name="request_id" 
+                                invisible="is_equipment"
+                              
+                                />
+                                  <field name="eq_request_id"  readonly="1"
+                                  invisible="not is_equipment"
+                              
+                                />
+                                <field name="warehouse_id"/>
+                                <field name="location_id"/>
+                                <field name="destination_location_id"/>
+                            </group>
+
+                            <group>
+                                <field name="issued_by"></field>
+                                <field name="issued_date"></field>
+                                <field name="approved_by"></field>
+                                <field name="approved_date"></field>
+                                <field name="recieved_by"></field>
+                                <field name="recieved_date"></field>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Voucher Lines">
+                                <field name="voucher_lines" nolabel="1" widget="one2many_list">
+                                    <tree>
+                                        <field name="product_id"/>
+                                        <field name="quantity"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                 
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for Store Issue Voucher -->
+        <record id="view_store_issue_voucher_tree" model="ir.ui.view">
+            <field name="name">store.issue.voucher.tree</field>
+            <field name="model">store.issue.voucher</field>
+            <field name="arch" type="xml">
+                <tree string="Store Issue Vouchers">
+                    <field name="name"/>
+                    <field name="issued_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view for Store Issue Voucher Line -->
+        <record id="view_store_issue_voucher_line_form" model="ir.ui.view">
+            <field name="name">store.issue.voucher.line.form</field>
+            <field name="model">store.issue.voucher.line</field>
+            <field name="arch" type="xml">
+                <form string="Store Issue Voucher Line">
+                    <sheet>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="quantity"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree view for Store Issue Voucher Line -->
+        <record id="view_store_issue_voucher_line_tree" model="ir.ui.view">
+            <field name="name">store.issue.voucher.line.tree</field>
+            <field name="model">store.issue.voucher.line</field>
+            <field name="arch" type="xml">
+                <tree string="Store Issue Voucher Lines">
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+
+          <record id="action_store_issue_voucher" model="ir.actions.act_window">
+            <field name="name">Store Issue</field>
+            <field name="res_model">store.issue.voucher</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="menu_store_issue_voucher" name="Store Issues" parent="menu_store_request" action="action_store_issue_voucher"/>
+
+    </data>
+</odoo>

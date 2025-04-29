@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_store_request_form" model="ir.ui.view">
+        <field name="name">store.request.form</field>
+        <field name="model">store.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="is_approver" invisible="1"/>
+                    <field name="pr_count" invisible="1"/>
+                    <field name="siv_count" invisible="1"/>
+                    <field name="is_allowed" invisible="1"/>
+                    <field name="can_siv" invisible="1" />  
+                    
+                    <button name="create_purchase_request" 
+                            string="Create Purchase" 
+                            type="object" 
+                            class="btn-primary" 
+                            groups="store_request.group_store_manager"
+                            invisible="state not in ('approved', 'on siv') or pr_count > 0"/>
+                    
+                   <button name="create_issue_voucher" 
+        string="Create SIV" 
+        type="object" 
+        class="btn-primary" 
+        groups="store_request.group_store_manager"
+        invisible="(state not in  ['approved','on siv','on request']) or (not can_siv)" />
+
+                    
+                    <button name="action_submit"  
+                            string="Submit" 
+                            type="object" 
+                            class="btn-primary"
+                            invisible="state != 'draft' or not is_allowed"/>
+                    
+                    <button name="action_reject" 
+                            string="Reject" 
+                            type="object" 
+                            class="btn-danger" 
+                            groups="mrp_staging.group_general_manager"
+                            invisible="state != 'to_approve'"/>
+                    
+                    <button name="action_approve" 
+                            string="Approve" 
+                            type="object" 
+                            class="btn-success"
+                            invisible="state != 'to_approve' or not is_approver"/>
+                            
+                    <field name="state" widget="statusbar" 
+                           statusbar_visible="draft,to_approve,approved,reject,validate"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="siv_action" 
+                                type="object"  
+                                class="oe_stat_button" 
+                                icon="fa-file-text">
+                            <field name="siv_count" widget="statinfo" string="SIV"/>
+                        </button>
+
+                        <button name="pr_action" 
+                                type="object"  
+                                class="oe_stat_button" 
+                                icon="fa-shopping-cart">
+                            <field name="pr_count" widget="statinfo" string="Purchase Requests"/>
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" readonly="1" placeholder="Store Request Reference"/></h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="requester_id" readonly="1"/>
+                            <field name="department_id" readonly="1"/>
+                            <field name="effective_date" readonly="1"/>
+                            <field name="requested_date" readonly="1"/>
+                            <field name='urgency' widget="priority"
+                                   help="No star => low priority 1 star => medium 2 => high 3 => urgent 4 => very urgent"/>
+                            <field name="reason" required="1" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="ref" readonly="not is_allowed" placeholder="External Reference"/>
+                            <field name="checked_by" readonly="1"/>
+                            <field name="checked_date" readonly="1"/>
+                            <field name="approved_by" readonly="1"/>
+                            <field name="approved_date" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Request Lines" name="request_lines">
+                            <field name="request_lines" widget="section_and_note_one2many">
+                                <tree editable="bottom" decoration-danger="quantity > qty_available">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="product_id" 
+                                           required="1" 
+                                           options="{'no_create': True, 'no_edit': True}" 
+                                           readonly="not parent.is_allowed"
+                                          
+                                           force_save="1"/>
+                                    <field name="quantity" 
+                                           readonly="not parent.is_allowed"
+                                           force_save="1"/>
+                                    <field name="uom_id" 
+                                           readonly="not parent.is_allowed"
+                                           force_save="1"
+                                           groups="uom.group_uom"/>
+                                    <field name="qty_available"
+                                           invisible="parent.state == 'draft'" 
+                                           readonly="1"
+                                           decoration-danger="quantity > qty_available"/>
+                                    <field name="remark" 
+                                           readonly="not parent.is_allowed"
+                                           force_save="1"/>
+                                         
+                                         
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+              
+            </form>
+        </field>
+    </record>
+
+    <record id="view_store_request_tree" model="ir.ui.view">
+        <field name="name">store.request.tree</field>
+        <field name="model">store.request</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'draft'" 
+                  decoration-warning="state == 'to_approve'"
+                  decoration-success="state == 'approved'"
+                  decoration-danger="state == 'reject'">
+                <field name="name"/>
+                <field name="requested_date"/>
+                <field name="requester_id"/>
+                <field name="department_id"/>
+                <field name="ref"/>
+                <field name="state" widget="badge" 
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'to_approve'"
+                       decoration-success="state == 'approved'"
+                       decoration-danger="state == 'reject'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_store_request" model="ir.actions.act_window">
+        <field name="name">Store Requests</field>
+        <field name="res_model">store.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

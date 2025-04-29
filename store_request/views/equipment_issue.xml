@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_equipment_issue_tree" model="ir.ui.view">
+        <field name="name">equipment.issue.tree</field>
+        <field name="model">equipment.issue</field>
+        <field name="arch" type="xml">
+            <tree string="Equipment Issues" create='0'>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="quantity"/>
+                <field name="requested_date"/>
+                <field name="return_date"/>
+                <field name="state"/>
+                 <!-- Add Return button -->
+                <button name="action_return" type="object" string="Return" class="oe_highlight" 
+                        invisible="state != 'issue'"
+                        />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_equipment_issue" model="ir.actions.act_window">
+        <field name="name">Equipment Issues</field>
+        <field name="res_model">equipment.issue</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_equipment_issue_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_create">
+                No Equipment Issues found. 
+            </p>
+        </field>
+    </record>
+
+
+    
+</odoo>

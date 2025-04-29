@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Purchase Tender Form View -->
+        <record id="view_purchase_tender_form" model="ir.ui.view">
+            <field name="name">purchase.tender.form</field>
+            <field name="model">purchase.tender</field>
+            <field name="arch" type="xml">
+                <form string="Purchase Tender">
+                    <header>
+                    <field name="closed" invisible="1" />
+                        <button name="create_purchase_order"  string="Create Purchase Order"
+                                 type="object" class="oe_highlight"  invisible="tender_status" />
+                        <button name="action_create_transit_records"
+                            string="Add To Winners List"
+                            type="object"
+                            class="btn-primary"/>   
+                    <button name="close_tender" string="Close Tender" type="object" groups="store_request.group_general_manager" invisible="closed" />     
+                    </header>
+                    <sheet>
+                         <div name="button_box" position="inside">
+
+                            <button name="purchase_order_action" string="Purchase Order Action " type="object"  class="oe_stat_button">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="purchase_order_count" invisible="0"/>
+                                    </span>
+                                    <span class="o_stat_text">Purchase Order</span>
+                                </div>
+                            </button>
+                        </div>
+                        <group>
+                             <field name="name" readonly="closed"/>
+                        </group>
+                        <group>
+                        <group>
+                           <!-- <field name="representative_id" widget="many2many_tags"/> -->
+                            <field name="request_id" widget="many2one_clickable"/>
+                            <!-- <field name="partner_id" /> -->
+                            <field name="product_id" readonly="1"/>
+                            <field name="tender_status" invisible="1"/>
+                            <field name="manual_winner" string="Set Winners Manually" readonly="closed"/>
+                            <field name="use_local_limits" string="Enable Configuration" invisible="1"/>
+                            <field name="tender_date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="comeetes" widget="many2many_tags" readonly="closed"/>
+                            <field name="memo" widget="binary" filename="memo_filename" readonly="closed"/>
+                            <field name="memo_filename" invisible="1" />
+                        </group>
+                         </group>
+                        <notebook>
+                            <page string="Tender Lines" name="tender_line">
+                                <field name="tender_line_ids" nolabel="1" widget="one2many_list" readonly="closed">
+                                    <tree editable="bottom">
+                                        <field name="partner_id" />
+                                        <field name="representative_id" widget="many2many_tags"/>
+                                        <field name="product_qty"/>
+                                        <field name="product_uom"/>
+                                        <field name="price_unit"/>
+                                        <field name="price_value" required="1" optional='1'/>
+                                        <field name="response_i_q_t" required="1" optional='1'/>
+                                        <field name="product_quality" required="1" optional='1'/>
+                                        <field name="warranty" required="1" optional='1'/>
+                                        <field name="delivery_performance" required="1" optional='1'/>
+                                        <field name="credit_facility" required="1" optional='1'/>
+                                        <field name="stock_availability" required="1" optional='1'/>
+                                        <field name="reputation_past_experience" required="1" optional='1'/>
+                                        <field name="start_date" optional='1'/>
+                                        <field name="end_date" optional='1'/>
+                                        <field name="total_score" optional='1'/>
+                                        <field name="winner" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Configuration"  invisible="not use_local_limits">
+                                <group col="2">
+                                    <group>
+                                        <field name="local_response_i_q_t"/>
+                                        <field name="local_product_quality"/>
+                                        <field name="local_warranty"/>
+                                        <field name="local_price_value"/>
+                                    </group>
+                                    <group>
+                                        <field name="local_delivery_performance"/>
+                                        <field name="local_credit_facility"/>
+                                        <field name="local_stock_availability"/>
+                                        <field name="local_reputation_past_experience"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" />
+                            <field name="activity_ids" />
+                            <field name="message_ids" />
+                        </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Purchase Tender Tree View -->
+        <record id="view_purchase_tender_tree" model="ir.ui.view">
+            <field name="name">purchase.tender.tree</field>
+            <field name="model">purchase.tender</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="tender_status" invisible='1'/>
+                    <field name="name"/>
+                    <field name="request_id"  />
+                    <field name="product_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Purchase Tender Action -->
+        <record id="action_purchase_tender" model="ir.actions.act_window">
+            <field name="name">Purchase Tenders</field>
+            <field name="res_model">purchase.tender</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new tender.
+                </p>
+            </field>
+        </record>
+
+        <!-- Purchase Tender Menu -->
+        <menuitem id="menu_purchase_tender" name="Purchase Tenders" parent="purchase.menu_procurement_management"
+            action="action_purchase_tender"/>
+    </data>
+</odoo>

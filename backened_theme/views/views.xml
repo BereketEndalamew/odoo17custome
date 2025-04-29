@@ -1,0 +1,106 @@
+<odoo>
+    <record id="res_config_settings_view_form_inherit_theme" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.theme</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Theme Customization" string="Theme Customization">
+                    <h2>Theme Colors</h2>
+                    <p>Customize the look and feel of the theme</p>
+
+                    <div class="row mt16">
+                        <div class="col-12 col-lg-6">
+                            <label for="brand_color"/>Brand</label>
+                            <div class="input-group">
+                                <input type="color" name="brand_color" class="form-control"/>
+                            </div>
+
+                            <label for="primary_color"/>Primary</label>
+                            <div class="input-group">
+                                <input type="color" name="primary_color" class="form-control"/>
+                            </div>
+
+                            <label for="menu_text_color"/>Menu Text</label>
+                            <div class="input-group">
+                                <input type="color" name="menu_text_color" class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <label for="apps_text_color"/>Apps Text</label>
+                            <div class="input-group">
+                                <input type="color" name="apps_text_color" class="form-control"/>
+                            </div>
+
+                            <label for="apps_active_color"/>Apps Active</label>
+                            <div class="input-group">
+                                <input type="color" name="apps_active_color" class="form-control"/>
+                            </div>
+
+                            <label for="background_color"/>Background</label>
+                            <div class="input-group">
+                                <input type="color" name="background_color" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="mt16">Background Image</h2>
+                    <p>Set the background image for the apps menu</p>
+                    <div class="row mt16">
+                        <div class="col-12">
+                            <div class="input-group">
+                                <input type="file" name="background_image" accept="image/*"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="mt16">Context Colors</h2>
+                    <p>Customize context colors of the system</p>
+                    <div class="row mt16">
+                        <div class="col-12 col-lg-6">
+                            <label for="info_color"/>Info</label>
+                            <div class="input-group">
+                                <input type="color" name="info_color" class="form-control"/>
+                            </div>
+
+                            <label for="success_color"/>Success</label>
+                            <div class="input-group">
+                                <input type="color" name="success_color" class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <label for="warning_color"/>Warning</label>
+                            <div class="input-group">
+                                <input type="color" name="warning_color" class="form-control"/>
+                            </div>
+
+                            <label for="danger_color"/>Danger</label>
+                            <div class="input-group">
+                                <input type="color" name="danger_color" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt16">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-secondary" name="reset_theme_colors">Reset Theme Colors</button>
+                        </div>
+                    </div>
+
+                    <h2 class="mt16">Favicon &amp; Logo</h2>
+                    <p>Set your own favicon and logo for the appsbar</p>
+                    <div class="row mt16">
+                        <div class="col-12">
+                            <label for="company_logo"/>Logo</label>
+                            <div class="input-group">
+                                <input type="file" name="company_logo" accept="image/*"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

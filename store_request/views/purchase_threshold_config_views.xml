@@ -1,0 +1,60 @@
+<odoo>
+    <record id="view_purchase_config_settings_inherit" model="ir.ui.view">
+        <field name="name">purchase.config.settings.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+        <field name="arch" type="xml">
+            <!-- Targeting the div with the ID 'purchase_setting_container' to insert the new settings -->
+            <xpath expr="//form" position="inside">
+
+                <div class="row mt16">
+                    <div class="col-12  o_setting_box">
+
+                        <div style="color: black; font-size:20px; background-color:#ebebeb;width: 100%;padding-left: 20px;">
+                            <label for="direct_purchase_threshold" string="Purchase Types Settings"/>
+
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6  o_setting_box">
+
+                        <div class="o_setting_right_pane">
+                            <label for="direct_purchase_threshold" string="Direct Purchase Threshold"/>
+                            <div class="text-muted">
+                                    Specify the threshold for direct purchases.
+                            </div>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <field name="direct_purchase_threshold"/>
+                        </div>
+                    </div>
+                    <!-- performa Purchase Threshold -->
+                    <div class="col-12 col-lg-6  o_setting_box">
+
+                        <div class="o_setting_right_pane">
+                            <label for="proforma_purchase_threshold" string="performa Purchase Threshold"/>
+                            <div class="text-muted">
+                                    Specify the threshold for performa purchases.
+                            </div>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <field name="proforma_purchase_threshold"/>
+                        </div>
+                    </div>
+                    <!-- Bid Purchase Threshold -->
+                    <div class="col-12 col-lg-6  o_setting_box">
+
+                        <div class="o_setting_right_pane">
+                            <label for="bid_purchase_threshold" string="Bid Purchase Threshold"/>
+                            <div class="text-muted">
+                                    Specify the threshold for bid purchases.
+                            </div>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <field name="bid_purchase_threshold"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
