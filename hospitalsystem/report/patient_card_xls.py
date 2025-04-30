@@ -7,11 +7,9 @@ from odoo import models
 
 class PatientCardXlsx1(models.AbstractModel):
     _name = 'report.hospitalsystem.report_patient_id_card_xls'
-    _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, patients):
         bold = workbook.add_format({'bold': True})
-        format_1 = workbook.add_format({'bold': True, 'align': 'center', 'bg_color': 'yellow'})
 
         for obj in patients:
             sheet = workbook.add_worksheet(obj.name or "Patient")
